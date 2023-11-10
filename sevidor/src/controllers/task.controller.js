@@ -1,13 +1,20 @@
 import Task from "../models/task.model.js"
 
-export const getArte = async ( req, res ) =>
-{
+export const getArte = async (req, res) => {
+    try {
+        if (!req.user || !req.user.id) {
+            return res.status(401).json({ message: 'Usuario no autenticado' });
+        }
 
-    const tasks = await Task.find( {
-        user: req.user.id
-    } ).populate( "user" )
-    res.json( tasks )
+        const tasks = await Task.find({
+            user: req.user.id
+        }).populate("user");
+        res.json(tasks);
+    } catch (error) {
+        res.status(500).json({ message: "Error al obtener el Arte" });
+    }
 }
+
 
 export const getArteId = async ( req, res ) =>
 {
@@ -27,14 +34,14 @@ export const createArte = async ( req, res ) =>
     try
     {
 
-        const { nombre, description, propietario, precio, date } = req.body
+        const { nombre, descripcion,Urlimagen, propietario, precio, date } = req.body
 
-        const urlImagen = req.file ? req.file.filename : '';
+        // const urlImagen = req.file ? req.file.filename : '';
 
         const newTask = new Task( {
             nombre,
-            description,
-            Urlimagen: urlImagen,
+            descripcion,
+            Urlimagen,
             propietario,
             precio,
             date,
