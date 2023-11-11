@@ -34,17 +34,16 @@ export const createArte = async ( req, res ) =>
     try
     {
 
-        const { nombre, descripcion,Urlimagen, propietario, precio, date } = req.body
+        const { nombre, descripion,Urlimagen, propietario, precio, date } = req.body
 
         // const urlImagen = req.file ? req.file.filename : '';
 
         const newTask = new Task( {
             nombre,
-            descripcion,
+            descripion,
             Urlimagen,
             propietario,
             precio,
-            date,
             user: req.user.id
         } )
 

@@ -17,48 +17,55 @@ export const getCarritoArte = async (req, res) => {
     }
 }
 
-export const createCarritoArte = async(req, res) => {
-    try {
-    const {nombre, Urlimagen, precio} = req.body;
+export const createCarritoArte = async (req, res) => {
+    const { nombre, Urlimagen, precio } = req.body;
 
-    const estaEnLaArte = await taskModel.findOne({nombre});
-    
-    if(!estaEnLaArte){
-        res.status(400).json({message: "Esta asrte no se a encontrado en la base de datos"})
-    }else{
+    try {
+        const estaEnLaArte = await taskModel.findOne({ nombre });
+
+        if (!estaEnLaArte) {
+            return res.status(400).json({ message: "Este arte no se ha encontrado en la base de datos" });
+        }
+
         const elItemExiste = await Carrito.findOne({
             nombre,
+            Urlimagen,
+            precio,
             user: req.user.id,
         });
 
-        if(elItemExiste){
+        if (elItemExiste) {
             elItemExiste.Cantidad += 1;
             await elItemExiste.save();
 
-            estaEnLosProductos.EnCarrito = true;
-            await estaEnLosProductos.save();
+            estaEnLaArte.EnCarrito = true;
+            await estaEnLaArte.save();
 
-            res.json({message : 'la cantidad del producto a aunmentado',
-                      task:elItemExiste })
-        }else{
+            return res.json({
+                message: 'La cantidad del producto ha aumentado',
+                product: elItemExiste,
+            });
+        } else {
             const carritoArte = new Carrito({
                 nombre,
                 Urlimagen,
                 precio,
                 Cantidad: 1,
-                user: req.user.id
+                user: req.user.id,
             });
 
-            elItemExiste.EnCarrito = true;
-            await elItemExiste.save(); 
+            estaEnLaArte.EnCarrito = true;
+            await estaEnLaArte.save();
 
             await carritoArte.save();
-            res.json({massega: 'El producto fue agregado al carrito',
-                      producto: carritoArte,})
+            return res.json({
+                message: 'El producto fue agregado al carrito',
+                product: carritoArte,
+            });
         }
-    }
     } catch (error) {
-        res.status(500).json("Error al crear el arte en el carrito")
+        console.error(error);
+        return res.status(500).json("Error al crear el arte en el carrito");
     }
 };
 

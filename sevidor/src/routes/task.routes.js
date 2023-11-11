@@ -9,7 +9,7 @@ const router = Router()
 
 router.get( "/artes", requiredAuth, getArte )
 router.get( "/arte/:id", requiredAuth, getArteId )
-router.post( "/arte",  createArte )
+router.post( "/arte", requiredAuth, createArte )
 router.put( "/arte/:id", updateArte )
 router.delete( "/arte/:id", requiredAuth, deleteArte )
 

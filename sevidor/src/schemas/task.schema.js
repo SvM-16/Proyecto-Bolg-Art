@@ -4,7 +4,7 @@ export const createTaskSchema = z.object( {
     nombre: z.string( {
         required_error: "Nombre is required"
     } ),
-    descripcion: z.string( {
+    descripion: z.string( {
         required_error: "Description is required"
     } ),
     propietario: z.string( {
