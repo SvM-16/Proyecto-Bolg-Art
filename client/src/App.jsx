@@ -8,7 +8,7 @@ import HomePage from "./pages/HomePage"
 import ProtectedRoute from "./ProtectedRoute"
 
 import { AuthProvider } from "./context/AuthContext";
-// import { arteProvider } from "./context/TaskContext";
+import { ArteProvider } from "./context/TaskContext";
 import NavBar from "./components/NavBar"
 import ContactPage from "./pages/ContactPage"
 import LogoutPage from "./pages/logoutPage"
@@ -18,7 +18,7 @@ function App ()
   return (
     <>
       <AuthProvider>
-        {/* <arteProvider > */}
+        <ArteProvider >
           <BrowserRouter>
           <NavBar/>
             <Routes>
@@ -37,7 +37,7 @@ function App ()
               </Route>
             </Routes>
           </BrowserRouter>
-        {/* </arteProvider> */}
+        </ArteProvider>
       </AuthProvider>
 
     </>

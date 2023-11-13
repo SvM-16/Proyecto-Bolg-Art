@@ -1,6 +1,7 @@
 import '../css/obrasForm.css'
 import { useForm } from "react-hook-form";
-// import { useTasks } from "../context/TaskContext";
+import { useTasks } from "../context/TaskContext";
+import {BsCloudDownload} from "react-icons/bs"
 
 const TaskFormPage = () =>
 {
@@ -16,10 +17,11 @@ const TaskFormPage = () =>
   return (
     <>
       <div className='FormularioObras'>
-                  <div className='flex flex-col'>
+                  <div className=''>
                       <p className="title1">Registro de Obra </p>
-                      <div className='card2'>
+                      <div className='card2 flex'>
                           <form className="form3">
+                              <div className='flex flex-col'>
                               <label>
                                 <input className="input1" type="text" placeholder="" required />
                                 <span className='letra'>Nombre</span>
@@ -36,16 +38,18 @@ const TaskFormPage = () =>
                                 <input className="input1" type="number" placeholder="" required />
                                 <span className='letra'>Precio</span>
                               </label>
+                              </div>
                               <div>
                                 <button className="boton1">Montar</button>
                                 <button className="boton3">Continuar</button>
                               </div>
-                                <label htmlFor='imagenInput' className=' text-[1.4rem] cursor-pointer '>
-                                    <h1>IMAGEN</h1>
-                                    <input type='file' id='imagenInput' name='imagen' className='' />
-                                    {/* <BsCloudDownload id='icon' className='text-[120px] absolute' /> */}
-                                </label>
                           </form>
+                          <div className='imagenUrl  bg-[#ffffff49] relative'>
+                            <label htmlFor='imagenInput' className='imagenUrl text-[1.4rem] cursor-pointer '>
+                                <input type='file' id='imagenInput' name='imagen' className=' hidden' />
+                                <BsCloudDownload id='icon' className='icono absolute' />
+                            </label>
+                        </div>
                       </div>
                   </div>
               </div>

@@ -1,11 +1,11 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { getArteRequest, notificacionArte, createArtrRequest, updateArteRequest, deleteArteRequest } from "../api/task.js";
+import { getArteRequest, notificacionArte, createArteRequest, updateArteRequest, deleteArteRequest } from "../api/task.js";
 import { Toaster, toast } from 'sonner';
 import {AiFillDelete} from 'react-icons/ai'
 import {IoCreate} from 'react-icons/io5'
 
 
-const TaskContext = createContext()
+const ArteContext = createContext()
 
 export const useTasks = () =>
 {
@@ -19,7 +19,7 @@ export const useTasks = () =>
     return context
 }
 
-export function arteProvider({ children }){
+export function ArteProvider({ children }){
 
     const [artes, setArte] = useState([]);
     const [notificacion, setNotificacion] = useState(null)
@@ -80,7 +80,7 @@ export function arteProvider({ children }){
 
       const createArte = async(formDate) => {
         try {
-            const res = await createArtrRequest(formDate);
+            const res = await createArteRequest(formDate);
             console.log(res);
             showToast("Has agregado un arte","","sucess");
         } catch (error) {
@@ -122,7 +122,7 @@ export function arteProvider({ children }){
       }
 
     return (
-        <TaskContext.Provider value={ {
+        <ArteContext.Provider value={ {
             artes,
             createArte,
             updateArte,
@@ -131,9 +131,9 @@ export function arteProvider({ children }){
             getArteRequest
 
         } }>
-            <Toaster/>
+            <Toaster position="top-right" reverseOrder={false} />
             { children }
-        </TaskContext.Provider>
+        </ArteContext.Provider>
     )
 
 }
