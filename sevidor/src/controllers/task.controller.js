@@ -88,7 +88,7 @@ export const updateArte = async ( req, res ) =>
 export const verificacionDeArte = async(req, res) => 
 {
     try {
-        const Arte = await Task.find({Cantidad: {$lte: 3}});
+        const Arte = await Task.find({Cantidad: {$lte: 1}});
 
         if (Arte.length > 0){
             const alertaMensaje = 'Me quedan pocas artes para ofrecerte.'
@@ -99,7 +99,7 @@ export const verificacionDeArte = async(req, res) =>
         }else {
             await Task.updateMany({}, {AvisoUser: false});
 
-            res.status(200).json({message: 'Estado verificado exitosamente. No hay Arte con cantidad menor a 3.'})
+            res.status(200).json({message: 'Estado verificado exitosamente. No hay Arte con cantidad menor a 1.'})
         }
     } catch (error) {
         res.status(500).json("Error al ver la verificacion de la cantidad de productos");

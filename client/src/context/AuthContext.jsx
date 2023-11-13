@@ -1,11 +1,12 @@
 import { createContext, useState, useContext, useEffect } from "react";
 
-import { loginRequest, logoutRequest , registerRequest, verifyTokenRequest } from "../api/auth";
+import { loginRequest, logoutRequest , registerRequest, verifyTokenRequest, editProfileRequest, profileRequest} from "../api/auth";
 import Cookies from 'js-cookie'
+import { Toaster,  toast } from 'sonner';
 
 export const AuthContext = createContext()
 
-// eslint-disable-next-line react-refresh/only-export-components
+
 export const useAuth = () =>
 {
     const context = useContext( AuthContext )
@@ -16,7 +17,7 @@ export const useAuth = () =>
     return context
 }
 
-// eslint-disable-next-line react/prop-types
+
 export const AuthProvider = ( { children } ) =>
 {
     const [ user, setUser ] = useState( null )
@@ -24,16 +25,22 @@ export const AuthProvider = ( { children } ) =>
     const [ errors, setErrors ] = useState( [] )
     const [ loading, setLoading ] = useState( true )
 
-
+    const showToast = (title, description, type) => {
+        toast[type](description, {
+          title: title,
+          description: description
+        });
+      };
 
     const signup = async ( user ) =>
     {
         try
         {
-            const res = await registerRequest( user )
-            console.log( res )
-            setUser( res.data )
-            setIsAuthenticathed( true )
+        const res = await registerRequest( user )
+            console.log( res );
+            setUser( res.data );
+            showToast("Te has resgistrado", "", "success");
+            setIsAuthenticathed( true );
         } catch ( error )
         {
             setErrors( error.response.data )
@@ -45,9 +52,10 @@ export const AuthProvider = ( { children } ) =>
     {
         try
         {
-            const res = await loginRequest( user )
-            console.log( res.data )
-            setIsAuthenticathed( true )
+        const res = await loginRequest( user )
+            console.log( res.data );
+            setIsAuthenticathed( true );
+            showToast("Has iniciado seccion", "", "success");
             setUser( res.data )
         } catch ( error )
         {
@@ -65,9 +73,32 @@ export const AuthProvider = ( { children } ) =>
         try {
             await logoutRequest();
             setIsAuthenticathed(false);
+            showToast("Has cerrado seccion","", "success");
             setUser(null);
         } catch (error) {
             console.error("error durin logout", error)
+        }
+    }
+    
+    const perfil = async(id) => {
+        try {
+        const res = await profileRequest(id);
+            setUser(res.data);
+            console.log(res);
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    const editImagenProfile = async(formDate) => {
+        try {
+        const res = await editProfileRequest(user.id ,formDate);
+        const nuevaImgProfile = res.data.nuevaUrl;
+            setUser({...user, imagenProfile:nuevaImgProfile});
+            showToast("Se a actualizado tu foto de perfil ","","success")
+        } catch (error) {
+            console.log(error)
+            showToast("Error al editar el perfil","Hubo un error durante la editacion","error")
         }
     }
 
@@ -123,14 +154,17 @@ export const AuthProvider = ( { children } ) =>
     return (
         <AuthContext.Provider value={ {
             signup,
+            perfil,
             signin,
             logOut,
             user,
             isAuthenticathed,
+            editImagenProfile,
             errors,
             loading,
             
         } }>
+            <Toaster position="top-right" reverseOrder={false} />
             { children }
         </AuthContext.Provider>
     )

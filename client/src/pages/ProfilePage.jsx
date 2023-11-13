@@ -14,6 +14,7 @@ const ProfilePage = () => {
   return (
     <>
         <button onClick={handleLogOut} className="boton2">logOut</button>   
+        
     </>
   )
 }
