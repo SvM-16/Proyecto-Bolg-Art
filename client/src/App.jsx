@@ -9,6 +9,7 @@ import ProtectedRoute from "./ProtectedRoute"
 
 import { AuthProvider } from "./context/AuthContext";
 import { ArteProvider } from "./context/TaskContext";
+import  {CarritoProvider} from "./context/CarritoContext"
 import NavBar from "./components/NavBar"
 import ContactPage from "./pages/ContactPage"
 import LogoutPage from "./pages/logoutPage"
@@ -19,6 +20,7 @@ function App ()
     <>
       <AuthProvider>
         <ArteProvider >
+          <CarritoProvider>
           <BrowserRouter>
           <NavBar/>
             <Routes>
@@ -37,6 +39,7 @@ function App ()
               </Route>
             </Routes>
           </BrowserRouter>
+          </CarritoProvider>
         </ArteProvider>
       </AuthProvider>
 

@@ -33,25 +33,28 @@ export const createArte = async ( req, res ) =>
 
     try
     {
+        console.log('creando tarea')
+        const { nombre, descripcion, precio, date } = req.body
 
-        const { nombre, descripion,Urlimagen, propietario, precio, date } = req.body
-
-        // const urlImagen = req.file ? req.file.filename : '';
+        const Urlimagen = req.file ? req.file.path: null;
 
         const newTask = new Task( {
             nombre,
-            descripion,
-            Urlimagen,
-            propietario,
+            descripcion,
             precio,
+            Urlimagen,
+            date,
             user: req.user.id
         } )
 
-        const savedArte = await newTask.save()
-        res.status( 200 ).json( savedArte )
+        const savedTask = await newTask.save()
+        console.log('tarea creada con exito', savedTask)
+        res.status( 200 ).json( savedTask )
     } catch ( error )
     {
-        res.status( 500 ).json( { message: error.message } )
+        console.error('Error creating task:', error);
+        res.status(500).json({ message: 'Internal Server Error', error: error.message });
+        // res.status( 500 ).json( { message: error.message } )
     }
 
 }

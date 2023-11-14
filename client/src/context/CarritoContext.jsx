@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect} from 'react'
 import {getCarritoArteRequest, createCarritoArteRequest, putCarritoRequest} from '../api/carrito.js'
 import { Toaster, toast } from 'sonner';
-import {AiOutlineShoppingCart} from 'AiOutlineShoppingCart'
+import {AiOutlineShoppingCart} from 'react-icons/ai'
 
 const CarritoContext = createContext()
 
@@ -89,7 +89,7 @@ export function CarritoProvider({ children }){
       }
 
       const updateCarrito = async(arteId, query, body) => {
-        if(isActulizarCarrito){
+        if(isActualizarCarrito){
             return;
         }
         try {
@@ -122,7 +122,10 @@ export function CarritoProvider({ children }){
 
     return(
         <CarritoContext.Provider value={{
-
+            carrito,
+            precioTotal,
+            updateCarrito,
+            agregarCarrito
         }}>
             <Toaster position="top-right" reverseOrder={false} />
             {children}

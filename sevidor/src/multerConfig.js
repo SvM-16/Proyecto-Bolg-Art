@@ -1,5 +1,5 @@
 import multer from 'multer'
-// import fs from 'node:fs'
+import fs from 'node:fs'
 
 const almacenamiento = multer.diskStorage({
     destination:function(req, file, cb){
@@ -8,10 +8,10 @@ const almacenamiento = multer.diskStorage({
     },
     filename: function(req,file,cb){
         cb(null, Date.now()+'-'+file.originalname);
-        // fs.renameSync(file.path, cd)
+        fs.renameSync(file.path, cd)
     }
 })
 
 const upload = multer({storage:almacenamiento});
 
-export default upload
+module.exports = upload;

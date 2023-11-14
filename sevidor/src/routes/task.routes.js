@@ -3,7 +3,7 @@ import { getArte, getArteId, createArte, updateArte, deleteArte } from "../contr
 import { requiredAuth } from "../middlewares/tokenValidation.js"
 import { validateSchema } from "../middlewares/validator.middlewares.js"
 import { createTaskSchema } from "../schemas/task.schema.js";
-import upload from "../multerConfig.js";
+// import upload from "../multerConfig.js";
 
 const router = Router()
 
