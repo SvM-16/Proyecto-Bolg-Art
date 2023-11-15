@@ -5,17 +5,13 @@ const taskSchema = new mongoose.Schema( {
         type: String,
         required: true
     },
-    descripion: {
+    descripcion: {
         type: String,
         required: true
     },
     Urlimagen:{
         type:String,
         required:true
-    },
-    propietario: {
-        type: String,
-        required: true
     },
     precio: {
         type:Number,

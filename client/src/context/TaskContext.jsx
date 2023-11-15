@@ -9,7 +9,7 @@ const ArteContext = createContext()
 
 export const useTasks = () =>
 {
-    const context = useContext( TaskContext );
+    const context = useContext( ArteContext );
 
     if ( !context )
     {
@@ -61,22 +61,22 @@ export function ArteProvider({ children }){
         getArte();
       }, []);
 
-      useEffect(() => {
-        const mostrarNotificacion = async() => {
-            try {
-                const res = await notificacionArte();
-                console.log(res);
-                setNotificacion(res.data)
-                if (res.data && res.data.artes && res.data.artes[0] && res.data.artes[0].AvisoUser){
-                    console.log('AvisoUser es true');
-                }
-            } catch (error) {
-                console.log(error)
-            }
-        };
+    //   useEffect(() => {
+    //     const mostrarNotificacion = async() => {
+    //         try {
+    //             const res = await notificacionArte();
+    //             console.log(res);
+    //             setNotificacion(res.data)
+    //             if (res.data && res.data.artes && res.data.artes[0] && res.data.artes[0].AvisoUser){
+    //                 console.log('AvisoUser es true');
+    //             }
+    //         } catch (error) {
+    //             console.log(error)
+    //         }
+    //     };
 
-        mostrarNotificacion();
-    }, [])
+    //     mostrarNotificacion();
+    // }, [])
 
       const createArte = async(formDate) => {
         try {

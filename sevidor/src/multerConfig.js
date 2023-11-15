@@ -1,17 +1,19 @@
-import multer from 'multer'
-import fs from 'node:fs'
+import multer from "multer";
+import fs from 'fs'
 
-const almacenamiento = multer.diskStorage({
-    destination:function(req, file, cb){
-        cb(null, 'uploads/');
-        // res.send('imagen montada')
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        // Verifica y crea la carpeta "uploads" si no existe
+        const uploadsFolder = 'uploads';
+        if (!fs.existsSync(uploadsFolder)) {
+          fs.mkdirSync(uploadsFolder);
+        }
+    
+        cb(null, uploadsFolder);
+      },
+    filename: function(req, file, cb){
+        cb(null, Date.now()+'-'+file.originalname)
     },
-    filename: function(req,file,cb){
-        cb(null, Date.now()+'-'+file.originalname);
-        fs.renameSync(file.path, cd)
-    }
-})
+});
 
-const upload = multer({storage:almacenamiento});
-
-module.exports = upload;
+export const upload = multer({storage:storage})
