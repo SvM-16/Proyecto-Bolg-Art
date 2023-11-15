@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect} from 'react'
 import {getCarritoArteRequest, createCarritoArteRequest, putCarritoRequest} from '../api/carrito.js'
 import { Toaster, toast } from 'sonner';
-import {AiOutlineShoppingCart} from 'react-icons/ai'
+import {AiOutlineShoppingCart, AiFillDelete} from 'react-icons/ai';
 
 const CarritoContext = createContext()
 
