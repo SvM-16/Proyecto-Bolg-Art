@@ -7,12 +7,11 @@ import ProfilePage from "./pages/ProfilePage"
 import HomePage from "./pages/HomePage"
 import ProtectedRoute from "./ProtectedRoute"
 
-import { AuthProvider } from "./context/AuthContext";
+import { AuthProvider } from "./context/AuthContext.jsx";
 import { ArteProvider } from "./context/TaskContext";
 import  {CarritoProvider} from "./context/CarritoContext"
 import NavBar from "./components/NavBar"
 import ContactPage from "./pages/ContactPage"
-import LogoutPage from "./pages/logoutPage"
 
 function App ()
 {
@@ -32,7 +31,6 @@ function App ()
 
 
               <Route element={ <ProtectedRoute /> }>
-                <Route path="/logout" element={ <LogoutPage /> } />
                 <Route path="/formulario" element={ <ObrasFormPage /> } />
                 <Route path="/obrasPublic/:id" element={ <ObrasFormPage /> } />
                 <Route path="/profile" element={ <ProfilePage /> } />

@@ -1,18 +1,8 @@
 import '../css/obrasForm.css'
-import { useForm } from "react-hook-form";
-import { useTasks } from "../context/TaskContext";
 import {BsCloudDownload} from "react-icons/bs"
 
 const TaskFormPage = () =>
 {
-
-  // const { register, handleSubmit } = useForm();
-
-  // const {createTask} = useTasks()
-
-  // const onSubmited = handleSubmit((data) => {
-  //   createTask(data)
-  // }) 
 
   return (
     <>
@@ -28,7 +18,7 @@ const TaskFormPage = () =>
                               </label>
                               <div className="group">
                                 <textarea placeholder="‎" id="comment" name="comment" rows="5" required></textarea>
-                                <label htmlFor="comment">Descripcion</label>
+                                <label htmlFor="comment">Descripción</label>
                               </div>
                               <label>
                                 <input className="input1" type="text" placeholder="" required />

@@ -6,16 +6,14 @@ import { Toaster,  toast } from 'sonner';
 
 export const AuthContext = createContext()
 
-
-export const useAuth = () =>
+export const useAuth = () => 
 {
-    const context = useContext( AuthContext )
-    if ( !context )
-    {
-        throw new Error( 'useAuth must be used within an AuthProvider' )
+    const context = useContext(AuthContext);
+    if (!context) {
+      throw new Error('useAuth debe usarse dentro de un AuthProvider');
     }
-    return context
-}
+    return context;
+  };
 
 
 export const AuthProvider = ( { children } ) =>
