@@ -1,8 +1,8 @@
 import '../css/obrasForm.css';
 import { useForm } from 'react-hook-form';
-import { useTasks } from "../context/TaskContext";
+import { useTasks } from '../context/TaskContext.jsx';
 import { useNavigate } from 'react-router-dom';
-import {BsCloudDownload} from 'react-icons/bs'
+import { BsCloudDownload } from 'react-icons/bs'
 
 const ObraFormPage = () => {
     
@@ -18,8 +18,8 @@ const ObraFormPage = () => {
             formData.append('precio', data.precio);
             formData.append('file', data.file[0]);
 
-            await createArte(formData); // Espera a que se resuelva la Promesa
-            console.log('obra created', data);
+            await createArte(formData);
+      
             navigate('/obrasPublic');
         } catch (error) {
             console.error('error al crear la obra', error);
@@ -27,38 +27,40 @@ const ObraFormPage = () => {
     };
 
     return (
-        <>
-            <div className='FormularioObras'>
-                <div className='flex flex-col'>
-                    <p className="title1">Registro de Obra</p>
-                    <div className='card2'>
-                        <form onSubmit={handleSubmit(onSubmited)} encType="multipart/form-data" className="form3">
-                            <label>
-                                <input className="input1" type="text" {...register('nombre')} placeholder="" required />
-                                <span className='letra'>Nombre</span>
-                            </label>
-                            <div className="group">
-                                <textarea placeholder="‎" type="text" {...register('descripcion')} id="description" name="descripcion" rows="5" required></textarea>
-                                <label htmlFor="description">Descripcion</label>
-                            </div>
-                            <label>
-                                <input className="input1" type="number" {...register('precio')} placeholder="" required />
-                                <span className='letra'>Precio</span>
-                            </label>
-                            <div>
-                                <button className="boton1">Montar</button>
-                            </div>
-                        </form>
-                        <div className='imagenUrl  bg-[#ffffff49] relative'>
-                            <label htmlFor='imagenInput' {...register('file')} className='imagenUrl text-[1.4rem] cursor-pointer '>
-                            <input type='file' id='imagenInput' name='imagen' className=' hidden' />
-                            <BsCloudDownload id='icon' className='icono absolute' />
-                            </label>
+      <>
+      <div className='FormularioObras'>
+            <div className=''>
+                <p className="title1">Registro de Obra </p>
+                <div className='card2 flex'>
+                    <form onSubmit={handleSubmit(onSubmited)} encType="multipart/form-data" className="form3">
+                        <div className='flex flex-col'>
+                        <label>
+                          <input className="input1" type="text" {...register('nombre')} placeholder="" required />
+                          <span className='letra'>Nombre</span>
+                        </label>
+                        <div className="group">
+                          <textarea placeholder="‎" {...register('descripcion')} id="descripcion" name="descripcion" rows="5" required></textarea>
+                          <label htmlFor="comment">Descripción</label>
                         </div>
-                    </div>
+                        <label>
+                          <input className="input1" type="number" {...register('precio')} placeholder="" required />
+                          <span className='letra'>Precio</span>
+                        </label>
+                        </div>
+                        <div>
+                          <button className="boton1">Montar</button>
+                        </div>
+                    </form>
+                          <div className='imagenUrl  bg-[#ffffff49] relative'>
+                              <label  className='imagenUrl text-[1.4rem] cursor-pointer '>
+                                  <input type='file' {...register('file')} name='file' className=' hidden' />
+                                  <BsCloudDownload id='icon' className='icono absolute' />
+                              </label>
+                          </div>
                 </div>
             </div>
-        </>
+        </div>
+      </>
     );
 };
 

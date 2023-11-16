@@ -10,12 +10,11 @@ const taskSchema = new mongoose.Schema( {
         required: true
     },
     Urlimagen:{
-        type:String,
-        required:true
+        type: String
     },
     precio: {
-        type:Number,
-        required:true
+        type: Number,
+        required: true
     },
     date: {
         type: Date,

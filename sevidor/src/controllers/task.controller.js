@@ -42,8 +42,8 @@ export const createArte = async ( req, res ) =>
             nombre,
             descripcion,
             Urlimagen,
-            propietario,
             precio,
+            date,
             user: req.user.id
         } )
 

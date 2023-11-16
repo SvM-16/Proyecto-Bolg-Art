@@ -83,6 +83,7 @@ export function ArteProvider({ children }){
             const res = await createArteRequest(formDate);
             console.log(res);
             showToast("Has agregado un arte","","sucess");
+            setArte([...artes, res.data])
         } catch (error) {
             console.log(error);
             showToast("Error de creacion","Hubo un error durante la creacion","error");

@@ -8,7 +8,7 @@ import HomePage from "./pages/HomePage"
 import ProtectedRoute from "./ProtectedRoute"
 
 import { AuthProvider } from "./context/AuthContext.jsx";
-import { ArteProvider } from "./context/TaskContext";
+import { ArteProvider } from "./context/TaskContext.jsx";
 import  {CarritoProvider} from "./context/CarritoContext"
 import NavBar from "./components/NavBar"
 import ContactPage from "./pages/ContactPage"
